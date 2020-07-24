@@ -1,5 +1,6 @@
-import os
+# Config parameter
 
+import os
 
 class Config:
     def __init__(self, mode='conv', nfilt=26, nfeat=19, nfft=512, rate=16000):
