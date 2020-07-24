@@ -76,36 +76,27 @@ def build_rand_feat():
 
 def get_conv_model():
     model = Sequential()
-    # model.add(Conv2D(32, (3, 3), activation='relu', strides=(1,1),
-    #                  padding='same', input_shape=input_shape))
-    # model.add(Conv2D(64, (3, 3), activation='relu', strides=(1, 1),
-    #                  padding='same'))
-    # model.add(Conv2D(128, (3, 3), activation='relu', strides=(1, 1),
-    #                  padding='same'))
-    # model.add(MaxPooling2D((2,2)))
-    # model.add(Dropout(0.5))
-    # model.add(Flatten())
-    # model.add(Dense(128, activation='relu'))
-    # model.add(Dense(64, activation='relu'))
-    # model.add(Dense(3, activation='softmax'))
-    # model.summary()
-    # model.compile(loss='categorical_crossentropy',
-    #               optimizer='adam',
-    #               metrics=['acc'])
+    # CONV2D 1 
     model.add(Conv2D(32, (3, 3), padding='same',
                      input_shape=input_shape))
     model.add(Activation('relu'))
+    
+    # CONV2D 2 
     model.add(Conv2D(32, (3, 3)))
     model.add(Activation('relu'))
     model.add(Dropout(0.25))
 
+    # CONV2D 3 
     model.add(Conv2D(64, (3, 3), padding='same'))
     model.add(Activation('relu'))
+    
+    # CONV2D 4 
     model.add(Conv2D(64, (3, 3)))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
     model.add(Dropout(0.25))
-
+    
+    # Flatten layer
     model.add(Flatten())
     model.add(Dense(512))
     model.add(Activation('relu'))
@@ -113,11 +104,7 @@ def get_conv_model():
     model.add(Dense(3))
     model.add(Activation('softmax'))
 
-    # initiate RMSprop optimizer
-    # opt = keras.optimizers.RMSprop(learning_rate=0.0001, decay=1e-6)
-
     model.summary()
-    # Let's train the model using RMSprop
     model.compile(loss='categorical_crossentropy',
                   optimizer='adam',
                   metrics=['acc'])
